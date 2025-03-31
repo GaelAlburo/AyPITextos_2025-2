@@ -1,3 +1,7 @@
+# Autor: Rodrigo Gael Guzmán Alburo
+# Fecha: 30/03/2025
+
+
 def FTC(database_D, minsup):
     """
     Implementación del algoritmo Frequent Termset Cover (FTC)
@@ -29,6 +33,7 @@ def FTC(database_D, minsup):
             if ts.issubset(doc):
                 cov_ts[ts].add(i)
 
+    # Mientras no se cubran todos los documentos
     while len(coverage(SelectedTermSets)) < n:
         min_overlap = float("inf")
         BestCandidate = None
@@ -109,20 +114,20 @@ def DetermineFrequentTermsets(D, minsup):
 
 
 if __name__ == "__main__":
-    # Datos sintéticos de ejemplo
+    # Datos de ejemplo
     documents = [
-        {"manzana", "platano", "naranja"},  # Doc 0 - Frutas comunes
+        {"manzana", "platano", "naranja"},  # Doc 0
         {"manzana", "platano"},  # Doc 1
         {"manzana", "naranja"},  # Doc 2
         {"manzana"},  # Doc 3
         {"platano", "naranja"},  # Doc 4
         {"platano"},  # Doc 5
         {"naranja"},  # Doc 6
-        {"lechuga", "tomate"},  # Doc 7 - Verduras
+        {"lechuga", "tomate"},  # Doc 7
         {"lechuga", "tomate", "pepino"},  # Doc 8
         {"lechuga", "pepino"},  # Doc 9
         {"tomate", "pepino"},  # Doc 10
-        {"pan", "leche", "huevos"},  # Doc 11 - Desayuno
+        {"pan", "leche", "huevos"},  # Doc 11
         {"pan", "leche"},  # Doc 12
         {"pan", "huevos"},  # Doc 13
         {"leche", "huevos"},  # Doc 14
@@ -132,13 +137,13 @@ if __name__ == "__main__":
     ]
 
     # Ejecutar el algoritmo FTC
-    minsup = 0.2  # 20% de soporte mínimo (al menos 4 documentos para 18 totales)
+    minsup = 0.2  # 20% de soporte mínimo
     selected_termsets, coverage = FTC(documents, minsup)
 
-    # Mostrar resultados - VERSIÓN CORREGIDA
+    # Mostrar resultados
     print("Conjuntos de términos seleccionados:")
     for i, termset in enumerate(selected_termsets):
-        # Convertimos el frozenset a un conjunto normal para mostrarlo mejor
+        # Convertimos el frozenset a un set normal para mostrarlo mejor
         termset_set = set(termset)
         # Buscamos la clave correcta en el diccionario coverage
         for key in coverage:
